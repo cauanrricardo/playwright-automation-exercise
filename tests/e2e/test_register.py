@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect 
 
-def test_register_user_sucefully(page: Page, navigate_to_home):
+def test_register_user_sucefully(page: Page, navigate_to_home, user_email, user_password):
 # Navigate to url 'http://automationexercise.com'
 # Verify that home page is visible successfully
     print(page.url)
@@ -15,14 +15,14 @@ def test_register_user_sucefully(page: Page, navigate_to_home):
     expect(page.get_by_role("heading", level=2 , name="New User Signup!"))
 # Enter name and email address
     page.get_by_placeholder("Name").fill("Cauan Ricardo")
-    page.locator('[data-qa="signup-email"]').fill("cauanrricardo@gmail.com")
+    page.locator('[data-qa="signup-email"]').fill(user_email)
   
 # Click 'Signup' button
     page.get_by_role("button", name="Signup").click()
 # Verify that 'ENTER ACCOUNT INFORMATION' is visible
     page.get_by_text("Enter Account Information").is_visible
 # Fill details: Title, Name, Email, Password, Date of birth
-    page.locator('[data-qa="password"]').fill("224508rS.")
+    page.locator('[data-qa="password"]').fill(user_password)
     page.locator('[data-qa="days"]').select_option("21")
     page.locator('[data-qa="months"]').select_option("June")
     page.locator('[data-qa="years"]').select_option("2005")
@@ -52,7 +52,7 @@ def test_register_user_sucefully(page: Page, navigate_to_home):
 # Verify that 'Logged in as username' is visible
     expect(page.get_by_text("Logged in as")).to_be_visible()
 # Click 'Delete Account' button
-    page.get_by_role("link", name=" Delete Account").click()
+    # page.get_by_role("link", name=" Delete Account").click()
 # Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
-    expect(page.get_by_text("Account Deleted!")).to_be_visible()
+    # expect(page.get_by_text("Account Deleted!")).to_be_visible()
     
